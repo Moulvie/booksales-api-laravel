@@ -9,9 +9,10 @@
     <h1>Hello World</h1>
     <p>Ini adalah halaman genres buku</p>
 
-    @foreach ($genres as $item )
+    @foreach ($genres as $genre )
         <ul>
-            <li>{{ $item }}</li>
+            <li>{{ $genre ['name'] }}</li>
+            <li>{{ $genre ['description'] }}</li>
         </ul>
     
     @endforeach

@@ -9,9 +9,10 @@
     <h1>HELLO</h1>
     <P>INI adalah authors</P>
 
-    @foreach ($authors as $item )
+    @foreach ($authors as $author )
         <ul>
-            <li>{{ $item }}</li>
+            <li>{{ $author ['name'] }}</li>
+            <li>{{ $author ['bio'] }}</li>
         </ul>
     
     @endforeach
