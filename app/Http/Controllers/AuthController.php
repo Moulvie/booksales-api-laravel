@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -77,5 +79,32 @@ class AuthController extends Controller
             'user' => auth()->guard('api')->user(),
             'token' => $token,
         ], 200);
+    }
+
+
+    public function logout(Request $request) {
+        // try
+        // 1. invalidate token
+        // 2. cek isSuccess
+
+        // catch
+        // 1. cek isFailed
+
+        try {
+            JWTAuth::invalidate(JWTAuth::getToken());
+
+            return response()->json([
+                'succes' => true,
+                'message' => 'Logout successfully'
+            ], 200);
+            
+        } catch (JWTException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Logout failed'
+
+            ], 500);
+            
+        }
     }
 }

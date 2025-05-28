@@ -15,6 +15,10 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
+
+
+
 
 // --------------------------------------------------------------------------
 // Authenticated books
@@ -29,6 +33,8 @@ Route::middleware('auth:api')->group(function () {
 Route::apiResource('/books', BookController::class)->only(['index', 'show']);
 
 
+
+
 // ------------------------------------------------------------------------
 // Authenticated genres
 Route::middleware('auth:api')->group(function () {
@@ -41,6 +47,8 @@ Route::middleware('auth:api')->group(function () {
 });
 
 Route::apiResource('/genres', GenreController::class)->only(['index', 'show']);
+
+
 
 
 // -----------------------------------------------------------------------
