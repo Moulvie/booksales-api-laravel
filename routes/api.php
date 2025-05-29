@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -63,3 +64,21 @@ Route::middleware('auth:api')->group(function () {
 });
 
 Route::apiResource('/authors', AuthorController::class)->only(['index', 'show']);
+
+
+
+
+// ---------------------------------------------------------------------------------
+// Authenticated transactions
+Route::middleware('auth:api')->group(function () {
+    
+    Route::middleware(['role:admin'])->group(function () {
+        Route::apiResource('/transactions', TransactionController::class)->only(['index', 'destroy']);
+    }); 
+    
+    Route::middleware(['role:customer'])->group(function () {
+        Route::apiResource('/transactions', TransactionController::class)->only(['store', 'update', 'show']);
+        
+    });
+});
+

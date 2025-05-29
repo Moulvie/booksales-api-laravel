@@ -24,8 +24,13 @@ class DatabaseSeeder extends Seeder
       $this->call([
         AuthorSeeder::class,
       ]);
+      
       $this->call([
         UserSeeder::class,
+      ]);
+
+      $this->call([
+        TransactionSeeder::class,
       ]);
 
     }
